@@ -5,7 +5,7 @@ Console.WriteLine("Enter a command:\r\n- PLACE X,Y,DIRECTION\r\n- MOVE\r\n- LEFT
 
 string input = Console.ReadLine();
 var inputCommand = input.Split(" ");
-if (inputCommand.Length > 1)
+if (inputCommand.Length >= 1)
 {   
     if (inputCommand[0] == "FILE")
     {   //process file input file
@@ -15,6 +15,7 @@ if (inputCommand.Length > 1)
         {
                 ExecuteCommand(line);
         }
+        Console.ReadLine();
     }
     else
     {   //process stdin input file
@@ -57,7 +58,8 @@ void ExecuteCommand(string input)
             break;
         case "REPORT":
             string report = robotSimulator.ReportPosition();
-            Console.WriteLine(report);
+            if(!String.IsNullOrEmpty(report))
+                Console.WriteLine(report);
             break;
         case "EXIT":
             Environment.Exit(0);
